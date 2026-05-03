@@ -1,0 +1,48 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define Gradients -->
+  <defs>
+    <linearGradient id="proto-grad" x1="128" y1="40" x2="128" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF6B6B" />
+      <stop offset="100%" stop-color="#D00000" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Shape (Rounded Square) -->
+  <rect x="32" y="32" width="192" height="192" rx="40" fill="url(#proto-grad)" />
+
+  <!-- Proto Symbol (Shifted up slightly to make room for text) -->
+  <g filter="url(#shadow)" transform="translate(0, -10)">
+    <!-- Top Layer -->
+    <path d="M128 75L167 97.5V142.5L128 165L89 142.5V97.5L128 75Z" fill="white" fill-opacity="0.95"/>
+    
+    <!-- Middle Detail (Inset) -->
+    <path d="M128 95L150 107.7V132.3L128 145L106 132.3V107.7L128 95Z" fill="#D00000" />
+    
+    <!-- Bottom Layer Shadow/Depth -->
+    <path d="M128 181L167 158.5V113.5L128 136L89 113.5V158.5L128 181Z" fill="white" fill-opacity="0.4"/>
+  </g>
+
+  <!-- Text Label "PROTO" -->
+  <text 
+    x="128" 
+    y="206" 
+    font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" 
+    font-weight="900" 
+    font-size="26" 
+    text-anchor="middle" 
+    fill="white" 
+    letter-spacing="1"
+    style="text-transform: uppercase;"
+  >PROTO</text>
+</svg>

@@ -15,7 +15,11 @@
       "id": "proto",
       "aliases": ["Protobuf", "proto"],
       "extensions": [".proto"],
-      "configuration": "./language-configuration.json"
+      "configuration": "./language-configuration.json",
+      "icon": {
+        "light": "./icons/proto.svg",
+        "dark": "./icons/proto.svg"
+      }
     }],
     "grammars": [{
       "language": "proto",
