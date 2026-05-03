@@ -1,0 +1,31 @@
+// Sample Protobuf file for testing the extension
+
+syntax = "proto3";
+
+// Missing package declaration check will trigger for this file
+
+message user {
+  string name = 0;
+  int32 age = 1;
+  string email_address = 2;
+}
+
+message User {
+  string First_Name = 1;
+  string last_name = 2;
+  int32 age = 3;
+}
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc createUser(CreateUserRequest) returns (User);
+}
+
+message GetUserRequest {
+  int32 user_id = 1;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  int32 age = 2;
+}

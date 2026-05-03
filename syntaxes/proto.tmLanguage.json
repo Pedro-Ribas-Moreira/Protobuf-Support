@@ -1,0 +1,272 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Protobuf",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#package"
+		},
+		{
+			"include": "#imports"
+		},
+		{
+			"include": "#syntax"
+		},
+		{
+			"include": "#proto_definitions"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.proto",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.block.proto",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		},
+		"package": {
+			"name": "meta.package.proto",
+			"match": "^\\s*(package)\\s+([a-zA-Z_][a-zA-Z0-9_.]*)",
+			"captures": {
+				"1": {
+					"name": "storage.type.proto"
+				},
+				"2": {
+					"name": "entity.name.package.proto"
+				}
+			}
+		},
+		"imports": {
+			"name": "meta.import.proto",
+			"match": "^\\s*(import)\\s+(public)?\\s*(\"[^\"]*\")",
+			"captures": {
+				"1": {
+					"name": "entity.name.type.proto"
+				},
+				"2": {
+					"name": "storage.modifier.proto"
+				},
+				"3": {
+					"name": "string.quoted.double.proto"
+				}
+			}
+		},
+		"syntax": {
+			"name": "meta.syntax.proto",
+			"match": "^\\s*(syntax)\\s*=\\s*(\"[^\"]*\")",
+			"captures": {
+				"1": {
+					"name": "keyword.operator.proto"
+				},
+				"2": {
+					"name": "string.quoted.double.proto"
+				}
+			}
+		},
+		"proto_definitions": {
+			"patterns": [
+				{
+					"include": "#message_definition"
+				},
+				{
+					"include": "#service_definition"
+				},
+				{
+					"include": "#enum_definition"
+				}
+			]
+		},
+		"message_definition": {
+			"name": "meta.message.proto",
+			"begin": "^\\s*(message)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\{",
+			"end": "^\\s*\\}",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.proto"
+				},
+				"2": {
+					"name": "entity.name.class.proto"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#nested_message_definition"
+				},
+				{
+					"include": "#field_definition"
+				},
+				{
+					"include": "#oneof_definition"
+				},
+				{
+					"include": "#strings"
+				}
+			]
+		},
+		"nested_message_definition": {
+			"name": "meta.nested-message.proto",
+			"begin": "^\\s*(message)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\{",
+			"end": "^\\s*\\}",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.proto"
+				},
+				"2": {
+					"name": "entity.name.class.proto"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#field_definition"
+				},
+				{
+					"include": "#strings"
+				}
+			]
+		},
+		"field_definition": {
+			"name": "meta.field.proto",
+			"match": "^\\s*(repeated|optional|required)?\\s*(\\w+(?:<\\w+>)?)\\s+([a-z_][a-z0-9_]*)\\s*=\\s*(\\d+)",
+			"captures": {
+				"1": {
+					"name": "constant.language.proto"
+				},
+				"2": {
+					"name": "storage.type.proto"
+				},
+				"3": {
+					"name": "variable.other.member.proto"
+				},
+				"4": {
+					"name": "constant.numeric.proto"
+				}
+			}
+		},
+		"oneof_definition": {
+			"name": "meta.oneof.proto",
+			"begin": "\\b(oneof)\\s+([a-z_][a-z0-9_]*)\\s*\\{",
+			"end": "\\}",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.language.proto"
+				},
+				"2": {
+					"name": "variable.other.proto"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#field_definition"
+				}
+			]
+		},
+		"service_definition": {
+			"name": "meta.service.proto",
+			"begin": "^\\s*(service)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\{",
+			"end": "^\\s*\\}",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.class.proto"
+				},
+				"2": {
+					"name": "entity.name.type.proto"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#rpc_definition"
+				},
+				{
+					"include": "#strings"
+				}
+			]
+		},
+		"rpc_definition": {
+			"name": "meta.rpc.proto",
+			"match": "\\b(rpc)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+			"captures": {
+				"1": {
+					"name": "keyword.control.proto"
+				},
+				"2": {
+					"name": "entity.name.function.proto"
+				}
+			}
+		},
+		"enum_definition": {
+			"name": "meta.enum.proto",
+			"begin": "^\\s*(enum)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\{",
+			"end": "^\\s*\\}",
+			"beginCaptures": {
+				"1": {
+					"name": "constant.language.proto"
+				},
+				"2": {
+					"name": "entity.name.class.proto"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"name": "constant.other.enum.proto",
+					"match": "\\b([A-Z_][A-Z0-9_]*)\\s*="
+				},
+				{
+					"include": "#strings"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.proto",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.proto",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.proto",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "constant.character.escape.proto",
+							"match": "\\\\."
+						}
+					]
+				}
+			]
+		}
+	},
+	"scopeName": "source.proto"
+}

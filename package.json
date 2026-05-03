@@ -1,0 +1,26 @@
+{
+  "name": "protobuf-support",
+  "displayName": "Protobuf Support",
+  "description": "Protobuf language support with linting, syntax highlighting, and diagnostics",
+  "version": "0.0.1",
+  "main": "./extension.js",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "proto",
+      "aliases": ["Protobuf", "proto"],
+      "extensions": [".proto"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "proto",
+      "scopeName": "source.proto",
+      "path": "./syntaxes/proto.tmLanguage.json"
+    }]
+  }
+}
