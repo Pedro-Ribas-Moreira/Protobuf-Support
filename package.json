@@ -25,6 +25,11 @@
       "language": "proto",
       "scopeName": "source.proto",
       "path": "./syntaxes/proto.tmLanguage.json"
+    }],
+    "iconThemes": [{
+      "id": "proto-icons",
+      "label": "Protobuf Icons",
+      "path": "./themes/proto-icons.json"
     }]
   }
 }
